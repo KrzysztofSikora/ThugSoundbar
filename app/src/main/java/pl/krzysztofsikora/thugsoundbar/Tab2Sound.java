@@ -111,9 +111,22 @@ public class Tab2Sound extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                click(position);
+                Toast.makeText(mContext, id + " Short click", Toast.LENGTH_SHORT).show();
             }
 
+
+        });
+
+
+        listView .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+
+                click(position);
+
+                return true;
+            }
         });
 
     }
