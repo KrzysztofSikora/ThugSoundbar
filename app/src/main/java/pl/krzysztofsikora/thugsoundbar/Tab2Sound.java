@@ -96,15 +96,16 @@ public class Tab2Sound extends Fragment {
 
             /*YOUR CHOICE OF COLOR*/
                 textView.setTextColor(getResources().getColor(R.color.customWhite));
-                textView.setBackgroundColor(getResources().getColor(R.color.customAccent));
+                textView.setBackgroundResource(R.drawable.customshape);
                 return view;
             }
         };
 
 
         listView.setAdapter(adapter);
-        listView.setBackgroundColor(getResources().getColor(R.color.customPrimary));
-
+//        listView.setBackgroundColor(getResources().getColor(R.color.customPrimary));
+        // background listView
+//        listView.setBackgroundResource(R.drawable.);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
