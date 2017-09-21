@@ -2,6 +2,7 @@ package pl.krzysztofsikora.thugsoundbar;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,7 +28,7 @@ public class Tab2Sound extends Fragment {
 
     private ListView listView;
     private String[] activities;
-
+    int[] items = {R.raw.problem, R.drawable.item2};
 
     private static final int REQUEST_CODE_SHARE_TO_MESSENGER = 1;
 
@@ -37,7 +38,6 @@ public class Tab2Sound extends Fragment {
 
     int customNumber;
 
-
     private Context mContext;
 
 
@@ -45,9 +45,7 @@ public class Tab2Sound extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab2sound, container, false);
-
         mContext = container.getContext();
-
 
         listView = (ListView) rootView.findViewById(R.id.listView);
 
@@ -55,7 +53,6 @@ public class Tab2Sound extends Fragment {
 
         initResources();
         initActivitiesListView();
-
 
         callbackManager = CallbackManager.Factory.create();
         FacebookSdk.sdkInitialize(mContext);
@@ -101,6 +98,11 @@ public class Tab2Sound extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                MediaPlayer mediaPlayer = MediaPlayer.create(mContext, items[position]);
+                mediaPlayer.start(); // no need to call prepare(); create() does that for you
+
+
                 Toast.makeText(mContext, id + " Short click", Toast.LENGTH_SHORT).show();
             }
 
@@ -124,9 +126,9 @@ public class Tab2Sound extends Fragment {
 
     public void dialog(int number) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
-                .setTitle("My title")
-                .setMessage("Enter password");
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//                .setTitle("My title")
+//                .setMessage("Enter password");
         final FrameLayout frameView = new FrameLayout(mContext);
         builder.setView(frameView);
 
@@ -137,20 +139,23 @@ public class Tab2Sound extends Fragment {
 
         this.customNumber = number;
 
+        alertDialog.show();
+
+        Toast.makeText(mContext, number + " ", Toast.LENGTH_SHORT).show();
+
         mMessengerButton = dialoglayout.findViewById(R.id.messenger_send_button);
         mMessengerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 onMessengerButton(customNumber);
+                alertDialog.hide();
             }
 
         });
 
 
-        alertDialog.show();
 
-        Toast.makeText(mContext, number + " ", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -162,15 +167,14 @@ public class Tab2Sound extends Fragment {
         // The URI can reference a file://, content://, or android.resource. Here we use
         // android.resource for sample purposes.
 
-        int[] items = {R.drawable.item1, R.drawable.item2};
-
 
         Uri uri = Uri.parse("android.resource://pl.krzysztofsikora.thugsoundbar/" + items[number]);
 
+
         // Create the parameters for what we want to send to Messenger.
         ShareToMessengerParams shareToMessengerParams =
-                ShareToMessengerParams.newBuilder(uri, "image/jpeg")
-                        .setMetaData("{ \"image\" : \"tree\" }")
+                ShareToMessengerParams.newBuilder(uri, "audio/mpeg")
+                        .setMetaData("{ \"mp3\" : \"sound\" }")
                         .build();
 
         if (mPicking) {
@@ -179,6 +183,7 @@ public class Tab2Sound extends Fragment {
 
 
             MessengerUtils.finishShareToMessenger(this.getActivity(), shareToMessengerParams);
+
         } else {
             // Otherwise, we were launched directly (for example, user clicked the launcher icon). We
             // initiate the broadcast flow in Messenger. If Messenger is not installed or Messenger needs
