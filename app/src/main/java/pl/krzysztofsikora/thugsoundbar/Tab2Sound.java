@@ -28,7 +28,7 @@ public class Tab2Sound extends Fragment {
 
     private ListView listView;
     private String[] activities;
-    int[] items = {R.raw.problem, R.drawable.item2};
+    int[] items = {R.raw.problem, R.raw.ok, R.raw.twoonezero, R.raw.step};
 
     private static final int REQUEST_CODE_SHARE_TO_MESSENGER = 1;
 

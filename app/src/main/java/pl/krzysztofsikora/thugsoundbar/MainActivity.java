@@ -1,5 +1,6 @@
 package pl.krzysztofsikora.thugsoundbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
 
 
     @Override
@@ -142,6 +145,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+
+        if(id == android.R.id.home) {
+
+            Log.d("test", "back fragmetn");
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -170,14 +179,6 @@ public class MainActivity extends AppCompatActivity {
             return fragment;
         }
 
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-//            return rootView;
-//        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -199,12 +200,7 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
-//        @Override
-//        public Fragment getItem(int position) {
-//            // getItem is called to instantiate the fragment for the given page.
-//            // Return a PlaceholderFragment (defined as a static inner class below).
-//            return PlaceholderFragment.newInstance(position + 1);
-//        }
+
 
 
         @Override

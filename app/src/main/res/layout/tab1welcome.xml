@@ -3,16 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@android:color/holo_blue_dark"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/customPrimary">
+    android:backgroundTint="@color/customPrimary"
+    >
 
     <ImageView
         android:id="@+id/cover_logo"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="Opis"
-        android:scaleType="centerInside"
-        android:src="@drawable/strongloop_logo_reversed_stacked_rgb" />
-
+        android:scaleType="center"
+        android:src="@drawable/rocket_launch" />
 
 
 </FrameLayout>
